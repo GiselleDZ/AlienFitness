@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import Loading from './Loading'
 import useInputImage from './hooks/useInputImage'
 import useLoadPoseNet from './hooks/useLoadPoseNet'
-import useWindowSize from './hooks/useWindowSize'
+// import useWindowSize from './hooks/useWindowSize'
 import {drawKeypoints, getConfidentPoses} from '../../utils'
+import WindowResize from './WindowResize'
 
 export default function PoseNet({
   style,
@@ -17,6 +18,7 @@ export default function PoseNet({
   modelConfig,
   minPoseConfidence,
   minPartConfidence,
+  skeletonColor,
   width,
   height
 }) {
@@ -37,12 +39,14 @@ export default function PoseNet({
     frameRate
   })
 
-  const {wiiidth, heeeight} = useWindowSize()
-
+  // const {wiiidth, heeeight} = useWindowSize()
   useEffect(
     () => {
       if (!net || !image) return () => {}
       if ([net, image].some(elem => elem instanceof Error)) return () => {}
+
+      const videoWidth = width * 0.66
+      const videoHeight = videoWidth * 0.75
 
       const ctx = canvasRef.current.getContext('2d')
       const intervalID = setInterval(async () => {
@@ -56,7 +60,7 @@ export default function PoseNet({
             minPoseConfidence,
             minPartConfidence
           )
-          ctx.drawImage(image, 0, 0, width, height)
+          ctx.drawImage(image, 0, 0, videoWidth, videoHeight)
           onEstimateRef.current(confidentPoses)
           confidentPoses.forEach(({keypoints}) => drawKeypoints(ctx, keypoints))
         } catch (err) {
@@ -70,6 +74,11 @@ export default function PoseNet({
     [frameRate, height, image, minPartConfidence, minPoseConfidence, net, width]
   )
 
+  const videoWidth = width * 0.66
+
+  const videoHeight = videoWidth * 0.75
+  console.log('width in posenet component', videoHeight, width)
+
   return (
     <>
       <Loading name="model" target={net} />
@@ -79,8 +88,8 @@ export default function PoseNet({
         playsInline
         ref={videoRef}
         style={{width: '0', height: '0'}}
-        width={width}
-        height={height}
+        width={videoWidth}
+        height={videoHeight}
       />
       <canvas
         style={style}
@@ -165,6 +174,7 @@ PoseNet.defaultProps = {
   modelConfig: {},
   minPoseConfidence: 0.1,
   minPartConfidence: 0.5,
-  width: 900,
-  height: 700
+  skeletonColor: '#ffadea',
+  width: window.innerWidth,
+  height: window.innerHeight
 }
