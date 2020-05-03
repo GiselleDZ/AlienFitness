@@ -1,5 +1,5 @@
 {
-  "name": "stackathon",
+  "name": "alien-fitness",
   "version": "2.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
@@ -42,6 +42,10 @@
   "license": "MIT",
   "dependencies": {
     "@tensorflow-models/body-pix": "^2.0.5",
+    "@tensorflow-models/posenet": "^2.2.1",
+    "@tensorflow/tfjs": "^1.7.4",
+    "@tensorflow/tfjs-core": "^1.7.4",
+    "await-to-js": "^2.1.1",
     "axios": "^0.19.0",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.0.0",
@@ -56,6 +60,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-posenet": "^0.1.2",
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
