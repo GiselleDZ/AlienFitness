@@ -7,13 +7,13 @@ import Controls from './Controls'
 
 function InstructorCanvas() {
   return (
-    <Canvas camera={{zoom: 40, position: [0, 0, 500]}}>
-      <Suspense
+    <Canvas camera={{zoom: 80, position: [0, 200, 500]}}>
+      {/* <Suspense
         fallback={<Dom center className="loading" children="Loading..." />}
-      >
-        <Controls />
-        <Scene />
-      </Suspense>
+      > */}
+      <Controls />
+      <Scene />
+      {/* </Suspense> */}
     </Canvas>
   )
 }

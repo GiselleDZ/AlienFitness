@@ -45,7 +45,7 @@ export default function PoseNet({
       if (!net || !image) return () => {}
       if ([net, image].some(elem => elem instanceof Error)) return () => {}
 
-      const videoWidth = width * 0.66
+      const videoWidth = width
       const videoHeight = videoWidth * 0.75
 
       const ctx = canvasRef.current.getContext('2d')
@@ -74,16 +74,16 @@ export default function PoseNet({
     [frameRate, height, image, minPartConfidence, minPoseConfidence, net, width]
   )
 
-  const videoWidth = width * 0.66
+  const videoWidth = width
 
   const videoHeight = videoWidth * 0.75
-  console.log('width in posenet component', videoHeight, width)
+  // console.log('width in posenet component', videoHeight, width)
 
   return (
     <>
       <Loading name="model" target={net} />
       <Loading name="input" target={image} />
-      <font color="red">{errorMessage}</font>
+      {/* <font color="red">{errorMessage}</font> */}
       <video
         playsInline
         ref={videoRef}

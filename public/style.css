@@ -51,3 +51,16 @@ canvas,
   padding: 10px;
   transform: translate3d(-50%, -50%, 0);
 }
+
+.game {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.dashboard {
+  flex-direction: column;
+}
+
+.instructor {
+  display: flex;
+}
