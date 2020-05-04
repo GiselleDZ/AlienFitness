@@ -2,16 +2,17 @@ import React from 'react'
 
 import {Navbar} from './components'
 import Routes from './routes'
-import PoseNet from './components/Posenet/PoseNet'
+// import PoseNet from './components/Posenet/PoseNet'
 import WindowResize from './components/Posenet/WindowResize'
+import InstructorCanvas from './components/ThreeJS/InstructorCanvas'
 
 const App = () => {
   return (
     <div>
-      {/* <Navbar /> */}
-      {/* <PoseNet /> */}
+      <Navbar />
+      <InstructorCanvas />
       <WindowResize />
-      {/* <Routes /> */}
+      <Routes />
     </div>
   )
 }
