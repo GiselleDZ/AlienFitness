@@ -4,8 +4,13 @@ import Loading from './Loading'
 import useInputImage from './hooks/useInputImage'
 import useLoadPoseNet from './hooks/useLoadPoseNet'
 // import useWindowSize from './hooks/useWindowSize'
-import {drawKeypoints, getConfidentPoses} from '../../utils'
-import WindowResize from './WindowResize'
+import {
+  drawKeypoints,
+  getConfidentPoses,
+  drawSkeleton,
+  drawSegment
+} from '../../utils'
+// import WindowResize from './WindowResize'
 
 export default function PoseNet({
   style,
@@ -18,7 +23,9 @@ export default function PoseNet({
   modelConfig,
   minPoseConfidence,
   minPartConfidence,
+  flipHorizontal,
   skeletonColor,
+  skeletonLineWidth,
   width,
   height
 }) {
@@ -45,7 +52,7 @@ export default function PoseNet({
       if (!net || !image) return () => {}
       if ([net, image].some(elem => elem instanceof Error)) return () => {}
 
-      const videoWidth = width * 0.66
+      const videoWidth = width * -0.66
       const videoHeight = videoWidth * 0.75
 
       const ctx = canvasRef.current.getContext('2d')
@@ -53,17 +60,48 @@ export default function PoseNet({
         try {
           const poses = await net.estimatePoses(
             image,
+            // flipHorizontal,
             inferenceConfigRef.current
           )
+          console.log('before failing poses', poses)
           const confidentPoses = getConfidentPoses(
             poses,
             minPoseConfidence,
             minPartConfidence
           )
+
           ctx.drawImage(image, 0, 0, videoWidth, videoHeight)
+
           onEstimateRef.current(confidentPoses)
-          confidentPoses.forEach(({keypoints}) => drawKeypoints(ctx, keypoints))
+
+          confidentPoses.forEach(({keypoints}) => {
+            drawKeypoints(ctx, keypoints, minPoseConfidence, skeletonColor, 1)
+
+            console.log('after drawkeypoints', poses)
+
+            // drawSegment(
+            //     keypoints,
+            //     minPartConfidence,
+            //     skeletonColor,
+            //     skeletonLineWidth,
+            //     1,
+            //     ctx
+            //   )
+
+            //   console.log('after drawsegment', poses)
+
+            // drawSkeleton(
+            //   keypoints,
+            //   minPoseConfidence,
+            //   skeletonColor,
+            //   skeletonLineWidth,
+            //   ctx,
+            //   1
+            // )
+            // console.log('after drawskeleton', poses)
+          })
         } catch (err) {
+          console.log('THE ERROR IS IN THE TRY CATCH')
           clearInterval(intervalID)
           setErrorMessage(err.message)
         }
@@ -77,7 +115,7 @@ export default function PoseNet({
   const videoWidth = width * 0.66
 
   const videoHeight = videoWidth * 0.75
-  console.log('width in posenet component', videoHeight, width)
+  // console.log('width in posenet component', videoHeight, width)
 
   return (
     <>
@@ -174,7 +212,9 @@ PoseNet.defaultProps = {
   modelConfig: {},
   minPoseConfidence: 0.1,
   minPartConfidence: 0.5,
+  flipHorizontal: true,
   skeletonColor: '#ffadea',
+  skeletonLineWidth: 6,
   width: window.innerWidth,
   height: window.innerHeight
 }
