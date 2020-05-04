@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Staatliches', cursive;
 }
 
 a {
@@ -10,17 +10,21 @@ label {
   display: block;
 }
 
+.navbar {
+  border: 1px;
+  border-style: dashed;
+  border-color: #e92efb;
+}
+
 nav a {
   display: inline-block;
-  margin: 1em;
+  margin: 2em;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
 }
-
-@import url('https://fonts.googleapis.com/css?family=News+Cycle&display=swap');
 
 /* :root {
   font-size: 20px;
@@ -30,10 +34,10 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #070712;
-  color: #606063;
+  background: #04005e;
+  color: #e92efb;
   overflow: hidden;
-  font-family: 'News Cycle', sans-serif;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 #root {
@@ -48,8 +52,15 @@ canvas,
 }
 
 .loading {
-  padding: 10px;
-  transform: translate3d(-50%, -50%, 0);
+  /* padding: 10px; */
+  transform: translate3d(50%, 50%, 0);
+}
+
+.videocanvas {
+  margin: 20px;
+  border: 1px;
+  border-style: dashed;
+  border-color: #e92efb;
 }
 
 .game {
@@ -59,8 +70,19 @@ canvas,
 
 .dashboard {
   flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  margin: 20px;
+  border: 1px;
+  padding: 20px;
+  border-style: dashed;
+  border-color: #e92efb;
+  color: #e92efb;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 400;
 }
 
 .instructor {
   display: flex;
+  align-self: flex-end;
 }

@@ -10,7 +10,9 @@ const App = () => {
       <Navbar />
       <div className="game">
         <DashboardControls />
-        <WindowResize />
+        <div className="videocanvas">
+          <WindowResize />
+        </div>
       </div>
       <Routes />
     </div>

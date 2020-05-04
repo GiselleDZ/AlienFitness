@@ -8,6 +8,7 @@ const DashboardControls = () => {
         <h1>Hi</h1>
         <h3>Meet your Instructor:</h3>
       </div>
+      <div height="400px" />
       <div className="instructor">
         <InstructorCanvas />
       </div>
