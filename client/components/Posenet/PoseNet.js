@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, {useRef, useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import Loading from './Loading'
@@ -5,7 +6,7 @@ import useInputImage from './hooks/useInputImage'
 import useLoadPoseNet from './hooks/useLoadPoseNet'
 // import useWindowSize from './hooks/useWindowSize'
 import {drawKeypoints, getConfidentPoses} from '../../utils'
-import WindowResize from './WindowResize'
+// import WindowResize from './WindowResize'
 
 export default function PoseNet({
   style,
@@ -45,7 +46,7 @@ export default function PoseNet({
       if (!net || !image) return () => {}
       if ([net, image].some(elem => elem instanceof Error)) return () => {}
 
-      const videoWidth = width * 0.66
+      const videoWidth = width
       const videoHeight = videoWidth * 0.75
 
       const ctx = canvasRef.current.getContext('2d')
@@ -74,16 +75,16 @@ export default function PoseNet({
     [frameRate, height, image, minPartConfidence, minPoseConfidence, net, width]
   )
 
-  const videoWidth = width * 0.66
+  const videoWidth = width
 
   const videoHeight = videoWidth * 0.75
-  console.log('width in posenet component', videoHeight, width)
+  // console.log('width in posenet component', videoHeight, width)
 
   return (
     <>
       <Loading name="model" target={net} />
       <Loading name="input" target={image} />
-      <font color="red">{errorMessage}</font>
+      {/* <font color="red">{errorMessage}</font> */}
       <video
         playsInline
         ref={videoRef}
