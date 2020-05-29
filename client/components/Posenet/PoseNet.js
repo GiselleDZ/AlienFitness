@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, {useRef, useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import Loading from './Loading'
@@ -5,7 +6,7 @@ import useInputImage from './hooks/useInputImage'
 import useLoadPoseNet from './hooks/useLoadPoseNet'
 // import useWindowSize from './hooks/useWindowSize'
 import {drawKeypoints, getConfidentPoses} from '../../utils'
-import WindowResize from './WindowResize'
+// import WindowResize from './WindowResize'
 
 export default function PoseNet({
   style,

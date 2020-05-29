@@ -11,7 +11,9 @@ label {
 }
 
 .navbar {
-  border: 1px;
+  margin: 10px;
+  padding: 10px;
+  border: 1 px;
   border-style: dashed;
   border-color: #e92efb;
 }
